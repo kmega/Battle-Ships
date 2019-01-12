@@ -10,6 +10,9 @@ namespace BattleShips
     {
         static void Main(string[] args)
         {
+            GameEngine start = new GameEngine();
+            start.Game();
+
             Console.ReadKey();
         }
     }
