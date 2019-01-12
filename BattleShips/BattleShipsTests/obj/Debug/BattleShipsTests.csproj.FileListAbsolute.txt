@@ -1,0 +1,17 @@
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\BattleShipsTests.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\BattleShipsTests.pdb
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\BattleShips.exe
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\BattleShips.pdb
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\BattleShips.exe.config
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\obj\Debug\BattleShipsTests.csprojAssemblyReference.cache
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\obj\Debug\BattleShipsTests.csproj.CoreCompileInputs.cache
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\obj\Debug\BattleShipsTests.csproj.CopyComplete
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\obj\Debug\BattleShipsTests.dll
+C:\Users\Charles\Battle-Ships-Showcase\BattleShips\BattleShipsTests\obj\Debug\BattleShipsTests.pdb
