@@ -74,7 +74,28 @@ namespace BattleShips
 
         internal string UserDirection(string userInput)
         {
-            return null;
+            try
+            {
+                string direction = userInput.Split(' ')[1].ToLower();
+
+                switch (direction)
+                {
+                    case "up":
+                        return "up";
+                    case "right":
+                        return "right";
+                    case "down":
+                        return "down";
+                    case "left":
+                        return "left";
+                    default:
+                        return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

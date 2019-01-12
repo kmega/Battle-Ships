@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BattleShips
 {
     internal class GameEngine
     {
-        internal CellStatus[,] PlayerOneBoard = new CellStatus[10, 10];
-        internal CellStatus[,] PlayerTwoBoard = new CellStatus[10, 10];
-
-        internal bool PlayerOnePlacedAllShips = false;
-        internal bool PlayerTwoPlacedAllShips = false;
+        private int ShipCellsNumber = 2;
 
         internal void Game()
         {
+            CellStatus[,] PlayerOneBoard = new CellStatus[10, 10];
+            CellStatus[,] PlayerTwoBoard = new CellStatus[10, 10];
+
+            bool PlayerOnePlacedAllShips = false;
+            bool PlayerTwoPlacedAllShips = false;
+
             UI show = new UI();
             string userInput = "";
 
@@ -21,20 +24,36 @@ namespace BattleShips
                 {
                     show.BoardStatus(PlayerOneBoard);
 
-                    Console.WriteLine("\n\nPlayer 1.\nPlace ship x using cell coordinates and direction:");
+                    Console.WriteLine("\n\nPlayer 1.\nPlace " + ShipCellsNumber + " cell ship using starting coordinates and direction:\n");
                     userInput = Console.ReadLine();
+                    Console.Clear();
 
                     PlayerOneBoard = PlaceShip(PlayerOneBoard, userInput);
+
+                    if (ShipCellsNumber >= 6)
+                    {
+                        PlayerOnePlacedAllShips = true;
+                        ShipCellsNumber = 2;
+                    }
                 }
                 else
                 {
                     show.BoardStatus(PlayerTwoBoard);
 
-                    Console.WriteLine("\n\nPlayer 2.\nPlace ship x using cell coordinates and direction:");
+                    Console.WriteLine("\n\nPlayer 2.\nPlace" + ShipCellsNumber + " cell ship using starting coordinates and direction:\n");
                     userInput = Console.ReadLine();
+                    Console.Clear();
 
                     PlayerTwoBoard = PlaceShip(PlayerTwoBoard, userInput);
+
+                    if (ShipCellsNumber >= 6)
+                    {
+                        PlayerTwoPlacedAllShips = true;
+                        ShipCellsNumber = 2;
+                    }
                 }
+
+                Console.WriteLine("");
             }
         }
 
@@ -44,14 +63,15 @@ namespace BattleShips
             int[] coordinates = check.UserCoordinates(userInput);
             string direction = check.UserDirection(userInput);
 
-            if (coordinates[0] == -1 || coordinates[1] == -1)
+            if (coordinates[0] == -1 || coordinates[1] == -1 || direction == null)
             {
-                Console.WriteLine("Wrong input!\n\n");
+                Console.WriteLine("Wrong input!\n");
                 return board;
             }
             else
             {
                 board = ModifyBoard(board, coordinates, direction);
+
                 return board;
             }
         }
@@ -64,7 +84,33 @@ namespace BattleShips
                 {
                     if (i == coordinates[0] && j == coordinates[1])
                     {
-                        board[i, j] = CellStatus.Occupied;
+                        switch (direction)
+                        {
+                            case "up":
+                                for (int build = 0; build < ShipCellsNumber; build++)
+                                {
+                                    board[i - build, j] = CellStatus.Occupied;
+                                }
+                                break;
+                            case "right":
+                                for (int build = 0; build < ShipCellsNumber; build++)
+                                {
+                                    board[i, j + build] = CellStatus.Occupied;
+                                }
+                                break;
+                            case "down":
+                                for (int build = 0; build < ShipCellsNumber; build++)
+                                {
+                                    board[i + build, j] = CellStatus.Occupied;
+                                }
+                                break;
+                            case "left":
+                                for (int build = 0; build < ShipCellsNumber; build++)
+                                {
+                                    board[i, j - build] = CellStatus.Occupied;
+                                }
+                                break;
+                        }
                     }
                 }
             }
