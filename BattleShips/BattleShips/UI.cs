@@ -6,8 +6,7 @@ namespace BattleShips
     {
         internal void BoardStatus(CellStatus[,] board)
         {
-            Console.WriteLine("    1 2 3 4 5 6 7 8 9 10");
-            Console.WriteLine("------------------------");
+            Console.WriteLine("    1 2 3 4 5 6 7 8 9 10\n------------------------");
             for (int i = 0; i < 10; i++)
             {
                 switch (i)

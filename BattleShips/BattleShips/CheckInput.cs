@@ -12,29 +12,25 @@ namespace BattleShips
             {
                 userInput = userInput.ToLower();
 
-                string value1 = userInput[0].ToString();
-                string value2 = userInput[1].ToString();
+                string letter = userInput[0].ToString();
+                string number = userInput[1].ToString();
+                string mightBeValue = userInput[2].ToString();
+
+                if (mightBeValue != " ")
+                {
+                    number += mightBeValue;
+                }
 
                 try
                 {
-                    coordinates[0] = Convert.ToInt32(value1) - 1;
-                    coordinates[1] = ChangeLetterToDecimal(value2);
+                    coordinates[0] = Convert.ToInt32(number) - 1;
+                    coordinates[1] = ChangeLetterToDecimal(letter);
 
                     return coordinates;
                 }
                 catch
                 {
-                    try
-                    {
-                        coordinates[0] = ChangeLetterToDecimal(value1);
-                        coordinates[1] = Convert.ToInt32(value2) - 1;
-
-                        return coordinates;
-                    }
-                    catch
-                    {
-                        return coordinates;
-                    }
+                    return coordinates;
                 }
             }
             catch
