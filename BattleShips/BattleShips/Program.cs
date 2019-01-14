@@ -12,6 +12,7 @@ namespace BattleShips
             GameEngine start = new GameEngine();
             start.Game();
 
+            Console.WriteLine("Finished!");
             Console.ReadKey();
         }
     }

@@ -15,6 +15,8 @@ namespace BattleShips
             bool PlayerOnePlacedAllShips = false;
             bool PlayerTwoPlacedAllShips = false;
 
+            Ship ship = new Ship();
+
             UI show = new UI();
             string userInput = "";
 
@@ -26,7 +28,7 @@ namespace BattleShips
                 userInput = Console.ReadLine();
                 Console.Clear();
 
-                PlayerOneBoard = PlaceShip(PlayerOneBoard, userInput);
+                PlayerOneBoard = ship.CreateShip(PlayerOneBoard, userInput);
 
                 if (ShipCellsNumber >= 6)
                 {
@@ -43,33 +45,13 @@ namespace BattleShips
                 userInput = Console.ReadLine();
                 Console.Clear();
 
-                PlayerTwoBoard = PlaceShip(PlayerTwoBoard, userInput);
+                PlayerTwoBoard = ship.CreateShip(PlayerTwoBoard, userInput);
 
                 if (ShipCellsNumber >= 6)
                 {
                     PlayerTwoPlacedAllShips = true;
                     ShipCellsNumber = 2;
                 }
-            }
-        }
-
-        private CellStatus[,] PlaceShip(CellStatus[,] board, string userInput)
-        {
-            CheckInput check = new CheckInput();
-            int[] coordinates = check.UserCoordinates(userInput);
-            string direction = check.UserDirection(userInput);
-
-            if (coordinates[0] == -1 || coordinates[1] == -1 || direction == null)
-            {
-                Console.WriteLine("Wrong input!\n");
-
-                return board;
-            }
-            else
-            {
-                board = ModifyBoard(board, coordinates, direction);
-
-                return board;
             }
         }
 
@@ -126,11 +108,12 @@ namespace BattleShips
                     break;
             }
 
-            shipCanBeBuild = CheckCellsAroundShip(board, shipCoordinates);
+            Ship ship = new Ship();
+            shipCanBeBuild = ship.CheckCellsAroundShip(board, shipCoordinates);
 
             if (shipCanBeBuild == true)
             {
-                board = BuildShip(board, shipCoordinates);
+                board = ship.BuildShip(board, shipCoordinates);
                 ShipCellsNumber++;
 
                 return board;
@@ -141,64 +124,6 @@ namespace BattleShips
 
                 return board;
             }
-        }
-
-        private CellStatus[,] BuildShip(CellStatus[,] board, List<int[]> shipCoordinates)
-        {
-            int[] coordinates = { -1, -1 };
-
-            for (int i = 0; i < shipCoordinates.Count; i++)
-            {
-                coordinates = shipCoordinates[i];
-
-                board[coordinates[0], coordinates[1]] = CellStatus.Occupied;
-            }
-
-            return board;
-        }
-
-        private bool CheckCellsAroundShip(CellStatus[,] board, List<int[]> shipCoordinates)
-        {
-            int[] coordinates = { -1, -1 };
-
-            for (int i = -1; i <= 1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
-                {
-                    for (int k = 0; k < shipCoordinates.Count; k++)
-                    {
-                        coordinates = shipCoordinates[k];
-
-                        try
-                        {
-                            if (board[coordinates[0] + i, coordinates[1] + j] != CellStatus.Empty)
-                            {
-                                return false;
-                            }
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < shipCoordinates.Count; i++)
-            {
-                coordinates = shipCoordinates[i];
-
-                try
-                {
-                    board[coordinates[0], coordinates[1]] = CellStatus.Empty;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
