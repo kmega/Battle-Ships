@@ -5,6 +5,9 @@ namespace BattleShips
 {
     internal class GameEngine
     {
+        CellStatus[,] PlayerOneBoard = new CellStatus[10, 10];
+        CellStatus[,] PlayerTwoBoard = new CellStatus[10, 10];
+
         private bool PlayerOnePlacedAllShips = false;
         private bool PlayerTwoPlacedAllShips = false;
 
@@ -19,9 +22,6 @@ namespace BattleShips
 
         internal void Game()
         {
-            CellStatus[,] PlayerOneBoard = new CellStatus[10, 10];
-            CellStatus[,] PlayerTwoBoard = new CellStatus[10, 10];
-
             while (PlayerOnePlacedAllShips == false)
             {
                 PlayerOneBoard = PlaceShips(PlayerOneBoard, PlayerTwoShips, 1);
@@ -44,7 +44,7 @@ namespace BattleShips
             UI show = new UI();
             string userInput = "";
 
-            show.BoardStatus(board);
+            show.BoardStatus(PlayerOneBoard, PlayerTwoBoard);
 
             Console.WriteLine("\n\nPlayer " + playerNumber + ".\nPlace " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");
             userInput = Console.ReadLine();

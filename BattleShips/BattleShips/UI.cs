@@ -4,47 +4,48 @@ namespace BattleShips
 {
     internal class UI
     {
-        internal void BoardStatus(CellStatus[,] board)
+        internal void BoardStatus(CellStatus[,] playerOneBoard, CellStatus[,] playerTwoBoard)
         {
-            Console.WriteLine("    1 2 3 4 5 6 7 8 9 10\n------------------------");
+            Console.WriteLine(" Player One:\t\t    Player Two:\n\n     1 2 3 4 5 6 7 8 9 10        1 2 3 4 5 6 7 8 9 10\n ------------------------    ------------------------");
             for (int i = 0; i < 10; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        Console.Write("A | ");
+                        Console.Write(" A | ");
                         break;
                     case 1:
-                        Console.Write("B | ");
+                        Console.Write(" B | ");
                         break;
                     case 2:
-                        Console.Write("C | ");
+                        Console.Write(" C | ");
                         break;
                     case 3:
-                        Console.Write("D | ");
+                        Console.Write(" D | ");
                         break;
                     case 4:
-                        Console.Write("E | ");
+                        Console.Write(" E | ");
                         break;
                     case 5:
-                        Console.Write("F | ");
+                        Console.Write(" F | ");
                         break;
                     case 6:
-                        Console.Write("G | ");
+                        Console.Write(" G | ");
                         break;
                     case 7:
-                        Console.Write("H | ");
+                        Console.Write(" H | ");
                         break;
                     case 8:
-                        Console.Write("I | ");
+                        Console.Write(" I | ");
                         break;
                     case 9:
-                        Console.Write("J | ");
+                        Console.Write(" J | ");
                         break;
                 }
+
                 for (int j = 0; j < 10; j++)
                 {
-                    switch (board[i, j])
+                    switch (playerOneBoard[i, j])
                     {
                         case CellStatus.Empty:
                             Console.Write("  ");
@@ -60,6 +61,60 @@ namespace BattleShips
                             break;
                     }
                 }
+
+                switch (i)
+                {
+                    case 0:
+                        Console.Write("    A | ");
+                        break;
+                    case 1:
+                        Console.Write("    B | ");
+                        break;
+                    case 2:
+                        Console.Write("    C | ");
+                        break;
+                    case 3:
+                        Console.Write("    D | ");
+                        break;
+                    case 4:
+                        Console.Write("    E | ");
+                        break;
+                    case 5:
+                        Console.Write("    F | ");
+                        break;
+                    case 6:
+                        Console.Write("    G | ");
+                        break;
+                    case 7:
+                        Console.Write("    H | ");
+                        break;
+                    case 8:
+                        Console.Write("    I | ");
+                        break;
+                    case 9:
+                        Console.Write("    J | ");
+                        break;
+                }
+
+                for (int j = 0; j < 10; j++)
+                {
+                    switch (playerTwoBoard[i, j])
+                    {
+                        case CellStatus.Empty:
+                            Console.Write("  ");
+                            break;
+                        case CellStatus.Occupied:
+                            Console.Write("O ");
+                            break;
+                        case CellStatus.Hit:
+                            Console.Write("H ");
+                            break;
+                        case CellStatus.Blocked:
+                            Console.Write("B ");
+                            break;
+                    }
+                }
+
                 Console.Write(Environment.NewLine);
             }
         }
