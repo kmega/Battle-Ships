@@ -8,11 +8,10 @@ namespace BattleShips
 {
     class Ship
     {
-        internal CellStatus[,] CreateShip(CellStatus[,] board, List<int> shipCellNumber, string userInput)
+        internal static CellStatus[,] CreateShip(CellStatus[,] board, List<int> shipCellNumber, string userInput, int playerNumber)
         {
-            CheckInput check = new CheckInput();
-            int[] coordinates = check.UserCoordinates(userInput);
-            string direction = check.UserDirection(userInput);
+            int[] coordinates = CheckInput.UserCoordinates(userInput);
+            string direction = CheckInput.UserDirection(userInput);
 
             if (coordinates[0] == -1 || coordinates[1] == -1 || direction == null)
             {
@@ -22,13 +21,13 @@ namespace BattleShips
             }
             else
             {
-                board = GameEngine.ModifyBoard(board, shipCellNumber, coordinates, direction);
+                board = GameEngine.ModifyBoard(board, shipCellNumber, coordinates, direction, playerNumber);
 
                 return board;
             }
         }
 
-        internal CellStatus[,] BuildShip(CellStatus[,] board, List<int[]> shipCoordinates)
+        internal static CellStatus[,] BuildShip(CellStatus[,] board, List<int[]> shipCoordinates)
         {
             int[] coordinates = { -1, -1 };
 
@@ -42,7 +41,7 @@ namespace BattleShips
             return board;
         }
 
-        internal bool CheckCellsAroundShip(CellStatus[,] board, List<int[]> shipCoordinates)
+        internal static bool CheckCellsAroundShip(CellStatus[,] board, List<int[]> shipCoordinates)
         {
             int[] coordinates = { -1, -1 };
 

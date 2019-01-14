@@ -20,7 +20,7 @@ namespace BattleShipsTests
             };
 
             // Given
-            CellStatus[,] expectedResult = GameEngine.ModifyBoard(result, shipCellNumber, coordinates, direction);
+            CellStatus[,] expectedResult = GameEngine.ModifyBoard(result, shipCellNumber, coordinates, direction, 1);
             result[0, 0] = CellStatus.Occupied;
 
             // Assert

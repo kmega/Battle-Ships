@@ -5,6 +5,7 @@
         Empty,
         Occupied,
         Hit,
-        Blocked
+        Blocked,
+        Fired
     }
 }

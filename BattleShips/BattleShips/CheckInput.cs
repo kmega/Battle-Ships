@@ -4,7 +4,7 @@ namespace BattleShips
 {
     internal class CheckInput
     {
-        internal int[] UserCoordinates(string userInput)
+        internal static int[] UserCoordinates(string userInput)
         {
             int[] coordinates = { -1, -1 };
 
@@ -14,23 +14,21 @@ namespace BattleShips
 
                 string letter = userInput[0].ToString();
                 string number = userInput[1].ToString();
-                string mightBeValue = userInput[2].ToString();
-
-                if (mightBeValue != " ")
-                {
-                    number += mightBeValue;
-                }
 
                 try
                 {
-                    coordinates[0] = ChangeLetterToDecimal(letter);
-                    coordinates[1] = Convert.ToInt32(number) - 1;
+                    string mightBeValue = userInput[2].ToString();
 
-                    return coordinates;
+                    if (mightBeValue != " ")
+                    {
+                        number += mightBeValue;
+                    }
+
+                    return ConvertToValidCoordinates(coordinates, letter, number);
                 }
                 catch
                 {
-                    return coordinates;
+                    return ConvertToValidCoordinates(coordinates, letter, number);
                 }
             }
             catch
@@ -39,7 +37,22 @@ namespace BattleShips
             }
         }
 
-        private int ChangeLetterToDecimal(string letter)
+        private static int[] ConvertToValidCoordinates(int[] coordinates, string letter, string number)
+        {
+            try
+            {
+                coordinates[0] = ChangeLetterToDecimal(letter);
+                coordinates[1] = Convert.ToInt32(number) - 1;
+
+                return coordinates;
+            }
+            catch
+            {
+                return coordinates;
+            }
+        }
+
+        private static int ChangeLetterToDecimal(string letter)
         {
             switch (letter)
             {
@@ -68,7 +81,7 @@ namespace BattleShips
             }
         }
 
-        internal string UserDirection(string userInput)
+        internal static string UserDirection(string userInput)
         {
             try
             {

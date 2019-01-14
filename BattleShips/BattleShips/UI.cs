@@ -4,7 +4,7 @@ namespace BattleShips
 {
     internal class UI
     {
-        internal void BoardStatus(CellStatus[,] playerOneBoard, CellStatus[,] playerTwoBoard)
+        internal static void BoardStatus(CellStatus[,] playerOneBoard, CellStatus[,] playerTwoBoard)
         {
             Console.WriteLine(" Player One:\t\t    Player Two:\n\n     1 2 3 4 5 6 7 8 9 10        1 2 3 4 5 6 7 8 9 10\n ------------------------    ------------------------");
             for (int i = 0; i < 10; i++)
@@ -59,6 +59,9 @@ namespace BattleShips
                         case CellStatus.Blocked:
                             Console.Write("B ");
                             break;
+                        case CellStatus.Fired:
+                            Console.Write("# ");
+                            break;
                     }
                 }
 
@@ -111,6 +114,9 @@ namespace BattleShips
                             break;
                         case CellStatus.Blocked:
                             Console.Write("B ");
+                            break;
+                        case CellStatus.Fired:
+                            Console.Write("# ");
                             break;
                     }
                 }
