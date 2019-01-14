@@ -8,6 +8,9 @@ namespace BattleShips
         CellStatus[,] PlayerOneBoard = new CellStatus[10, 10];
         CellStatus[,] PlayerTwoBoard = new CellStatus[10, 10];
 
+        CellStatus[,] PlayerOneOverlay = new CellStatus[10, 10];
+        CellStatus[,] PlayerTwoOverlay = new CellStatus[10, 10];
+
         private bool PlayerOnePlacedAllShips = false;
         private bool PlayerTwoPlacedAllShips = false;
 
@@ -29,14 +32,16 @@ namespace BattleShips
 
             Console.WriteLine("\n\nAll ships has been placed. Press anything to continue.");
             Console.ReadKey();
+            Console.Clear();
 
             while (PlayerTwoPlacedAllShips == false)
             {
                 PlayerTwoBoard = PlaceShips(PlayerTwoBoard, PlayerOneShips, 2);
             }
 
-            Console.WriteLine("All ships has been placed. Press anything to start the game.\n\n");
+            Console.WriteLine("\n\nAll ships has been placed. Press anything to start the game.\n\n");
             Console.ReadKey();
+            Console.Clear();
         }
 
         private CellStatus[,] PlaceShips(CellStatus[,] board, List<int> shipCellNumber, int playerNumber)
@@ -44,11 +49,22 @@ namespace BattleShips
             UI show = new UI();
             string userInput = "";
 
-            show.BoardStatus(PlayerOneBoard, PlayerTwoBoard);
+            if (playerNumber == 1)
+            {
+                show.BoardStatus(PlayerOneBoard, PlayerTwoOverlay);
+            }
+            else
+            {
+                show.BoardStatus(PlayerOneOverlay, PlayerTwoBoard);
+            }
 
             Console.WriteLine("\n\nPlayer " + playerNumber + ".\nPlace " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");
             userInput = Console.ReadLine();
-            Console.Clear();
+
+            if (shipCellNumber.Count > 1)
+            {
+                Console.Clear();
+            }
 
             Ship ship = new Ship();
 
