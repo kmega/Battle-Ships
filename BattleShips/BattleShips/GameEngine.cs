@@ -5,107 +5,91 @@ namespace BattleShips
 {
     internal class GameEngine
     {
-        private int ShipCellsNumber = 2;
+        private bool PlayerOnePlacedAllShips = false;
+        private bool PlayerTwoPlacedAllShips = false;
+
+        private static readonly List<int> PlayerOneShips = new List<int>
+        {
+            2, 3, 4, 5
+        };
+        private static readonly List<int> PlayerTwoShips = new List<int>
+        {
+            2, 3, 4, 5
+        };
 
         internal void Game()
         {
             CellStatus[,] PlayerOneBoard = new CellStatus[10, 10];
             CellStatus[,] PlayerTwoBoard = new CellStatus[10, 10];
 
-            bool PlayerOnePlacedAllShips = false;
-            bool PlayerTwoPlacedAllShips = false;
-
-            Ship ship = new Ship();
-
-            UI show = new UI();
-            string userInput = "";
-
             while (PlayerOnePlacedAllShips == false)
             {
-                show.BoardStatus(PlayerOneBoard);
-
-                Console.WriteLine("\n\nPlayer 1.\nPlace " + ShipCellsNumber + " cell ship using starting coordinates and direction:\n");
-                userInput = Console.ReadLine();
-                Console.Clear();
-
-                PlayerOneBoard = ship.CreateShip(PlayerOneBoard, userInput);
-
-                if (ShipCellsNumber >= 6)
-                {
-                    PlayerOnePlacedAllShips = true;
-                    ShipCellsNumber = 2;
-                }
+                PlayerOneBoard = PlaceShips(PlayerOneBoard, PlayerTwoShips, 1);
             }
+
+            Console.WriteLine("\n\nAll ships has been placed. Press anything to continue.");
+            Console.ReadKey();
 
             while (PlayerTwoPlacedAllShips == false)
             {
-                show.BoardStatus(PlayerTwoBoard);
-
-                Console.WriteLine("\n\nPlayer 2.\nPlace " + ShipCellsNumber + " cell ship using starting coordinates and direction:\n");
-                userInput = Console.ReadLine();
-                Console.Clear();
-
-                PlayerTwoBoard = ship.CreateShip(PlayerTwoBoard, userInput);
-
-                if (ShipCellsNumber >= 6)
-                {
-                    PlayerTwoPlacedAllShips = true;
-                    ShipCellsNumber = 2;
-                }
+                PlayerTwoBoard = PlaceShips(PlayerTwoBoard, PlayerOneShips, 2);
             }
+
+            Console.WriteLine("All ships has been placed. Press anything to start the game.\n\n");
+            Console.ReadKey();
         }
 
-        internal CellStatus[,] ModifyBoard(CellStatus[,] board, int[] coordinates, string direction)
+        private CellStatus[,] PlaceShips(CellStatus[,] board, List<int> shipCellNumber, int playerNumber)
+        {
+            UI show = new UI();
+            string userInput = "";
+
+            show.BoardStatus(board);
+
+            Console.WriteLine("\n\nPlayer " + playerNumber + ".\nPlace " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");
+            userInput = Console.ReadLine();
+            Console.Clear();
+
+            Ship ship = new Ship();
+
+            board = ship.CreateShip(board, shipCellNumber, userInput);
+
+            if (shipCellNumber.Count == 0 && playerNumber == 1)
+            {
+                PlayerOnePlacedAllShips = true;
+            }
+            if (shipCellNumber.Count == 0 && playerNumber == 2)
+            {
+                PlayerTwoPlacedAllShips = true;
+            }
+
+            return board;
+        }
+
+        static internal CellStatus[,] ModifyBoard(CellStatus[,] board, List<int> shipCellNumber, int[] coordinates, string direction)
         {
             List<int[]> shipCoordinates = new List<int[]>();
             bool shipCanBeBuild = false;
+            int[] cellCoordinates = { -1, -1 };
 
-            switch (direction)
+            for (int build = 0; build < shipCellNumber[0]; build++)
             {
-                case "up":
-                    for (int build = 0; build < ShipCellsNumber; build++)
-                    {
-                        int[] cellCoordinates = new int[] { -1, -1 };
-
-                        cellCoordinates[0] = coordinates[0] - build;
-                        cellCoordinates[1] = coordinates[1];
-
-                        shipCoordinates.Add(cellCoordinates);
-                    }
-                    break;
-                case "right":
-                    for (int build = 0; build < ShipCellsNumber; build++)
-                    {
-                        int[] cellCoordinates = new int[] { -1, -1 };
-
-                        cellCoordinates[0] = coordinates[0];
-                        cellCoordinates[1] = coordinates[1] + build;
-
-                        shipCoordinates.Add(cellCoordinates);
-                    }
-                    break;
-                case "down":
-                    for (int build = 0; build < ShipCellsNumber; build++)
-                    {
-                        int[] cellCoordinates = new int[] { -1, -1 };
-
-                        cellCoordinates[0] = coordinates[0] + build;
-                        cellCoordinates[1] = coordinates[1];
-
-                        shipCoordinates.Add(cellCoordinates);
-                    }
-                    break;
-                case "left":
-                    for (int build = 0; build < ShipCellsNumber; build++)
-                    {
-                        int[] cellCoordinates = new int[] { -1, -1 };
-
-                        cellCoordinates[0] = coordinates[0];
-                        cellCoordinates[1] = coordinates[1] - build;
-
-                        shipCoordinates.Add(cellCoordinates);
-                    }
-                    break;
+                switch (direction)
+                {
+                    case "up":
+                        cellCoordinates = new int[] { coordinates[0] - build, coordinates[1] };
+                        break;
+                    case "right":
+                        cellCoordinates = new int[] { coordinates[0], coordinates[1] + build };
+                        break;
+                    case "down":
+                        cellCoordinates = new int[] { coordinates[0] + build, coordinates[1] };
+                        break;
+                    case "left":
+                        cellCoordinates = new int[] { coordinates[0], coordinates[1] - build };
+                        break;
+                }
+                shipCoordinates.Add(cellCoordinates);
             }
 
             Ship ship = new Ship();
@@ -114,7 +98,7 @@ namespace BattleShips
             if (shipCanBeBuild == true)
             {
                 board = ship.BuildShip(board, shipCoordinates);
-                ShipCellsNumber++;
+                shipCellNumber.RemoveAt(0);
 
                 return board;
             }

@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BattleShips;
+using System.Collections.Generic;
 
 namespace BattleShipsTests
 {
@@ -14,10 +14,13 @@ namespace BattleShipsTests
             CellStatus[,] result = new CellStatus[10, 10];
             int[] coordinates = { 0, 0 };
             string direction = "right";
+            List<int> shipCellNumber = new List<int>
+            {
+                1
+            };
 
             // Given
-            GameEngine test = new GameEngine();
-            CellStatus[,] expectedResult = test.ModifyBoard(result, coordinates, direction);
+            CellStatus[,] expectedResult = GameEngine.ModifyBoard(result, shipCellNumber, coordinates, direction);
             result[0, 0] = CellStatus.Occupied;
 
             // Assert

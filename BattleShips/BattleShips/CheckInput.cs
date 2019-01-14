@@ -23,8 +23,8 @@ namespace BattleShips
 
                 try
                 {
-                    coordinates[0] = Convert.ToInt32(number) - 1;
-                    coordinates[1] = ChangeLetterToDecimal(letter);
+                    coordinates[0] = ChangeLetterToDecimal(letter);
+                    coordinates[1] = Convert.ToInt32(number) - 1;
 
                     return coordinates;
                 }

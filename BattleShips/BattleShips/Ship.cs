@@ -8,7 +8,7 @@ namespace BattleShips
 {
     class Ship
     {
-        internal CellStatus[,] CreateShip(CellStatus[,] board, string userInput)
+        internal CellStatus[,] CreateShip(CellStatus[,] board, List<int> shipCellNumber, string userInput)
         {
             CheckInput check = new CheckInput();
             int[] coordinates = check.UserCoordinates(userInput);
@@ -22,8 +22,7 @@ namespace BattleShips
             }
             else
             {
-                GameEngine game = new GameEngine();
-                board = game.ModifyBoard(board, coordinates, direction);
+                board = GameEngine.ModifyBoard(board, shipCellNumber, coordinates, direction);
 
                 return board;
             }
