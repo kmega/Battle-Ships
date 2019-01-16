@@ -16,15 +16,15 @@ namespace BattleShips
 
         private static readonly List<int> PlayerOneShips = new List<int>
         {
-            2, 2, 2
+            2, 3, 3, 4, 5
         };
         private static readonly List<int> PlayerTwoShips = new List<int>
         {
-            2, 2, 2
+            2, 3, 3, 4, 5
         };
 
-        private static readonly List<List<int[]>> PlayerOneShipPositions = new List<List<int[]>>();
-        private static readonly List<List<int[]>> PlayerTwoShipPositions = new List<List<int[]>>();
+        private static readonly List<List<int[]>> PlayerOneShipsPositions = new List<List<int[]>>();
+        private static readonly List<List<int[]>> PlayerTwoShipsPositions = new List<List<int[]>>();
 
         private static bool Winner = false;
         private static int PlayerTurn = 1;
@@ -51,7 +51,7 @@ namespace BattleShips
             {
                 if (PlayerTurn == 1)
                 {
-                    PlayerTwoOverlay = BattleStatus(PlayerTwoBoard, PlayerTwoOverlay, PlayerTwoShipPositions);
+                    PlayerTwoOverlay = BattleStatus(PlayerTwoBoard, PlayerTwoOverlay, PlayerTwoShipsPositions);
                     if (Winner == false)
                     {
                         PlayerTurn = 2;
@@ -59,7 +59,7 @@ namespace BattleShips
                 }
                 else
                 {
-                    PlayerOneOverlay = BattleStatus(PlayerOneBoard, PlayerOneOverlay, PlayerOneShipPositions);
+                    PlayerOneOverlay = BattleStatus(PlayerOneBoard, PlayerOneOverlay, PlayerOneShipsPositions);
                     if (Winner == false)
                     {
                         PlayerTurn = 1;
@@ -73,7 +73,7 @@ namespace BattleShips
 
         private static void ClickToContinue(CellStatus[,] board, string message)
         {
-            UI.BoardStatus(board, 1);
+            UI.BoardStatus(board, 0, 1);
             Console.WriteLine("\n All ships has been placed. " + message);
             Console.Write(" ");
             Console.ReadKey();
@@ -85,16 +85,17 @@ namespace BattleShips
             bool wasFiredUpon = true;
             string input = "";
             int[] coordinates = { -1, -1 };
+            List<int[]> coordinatesForDestruction = new List<int[]>();
 
             while (coordinates[0] == -1 || coordinates[1] == -1 || wasFiredUpon == true)
             {
                 if (PlayerTurn == 1)
                 {
-                    UI.BoardStatus(strategicOverlay, 1);
+                    UI.BoardStatus(strategicOverlay, PlayerTwoShipsPositions.Count, 1);
                 }
                 else
                 {
-                    UI.BoardStatus(strategicOverlay, 2);
+                    UI.BoardStatus(strategicOverlay, PlayerOneShipsPositions.Count, 2);
                 }
 
                 Console.WriteLine("\n Shoot at cell using it's coordinates:\n");
@@ -136,7 +137,20 @@ namespace BattleShips
                 }
             }
 
-            strategicOverlay = Ship.CheckIfShipIsDestoyed(enemyPlayerBoard, strategicOverlay, shipPositions);
+            coordinatesForDestruction = Ship.CheckIfShipIsDestoyed(enemyPlayerBoard, strategicOverlay, shipPositions);
+
+            if (coordinatesForDestruction.Count > 0)
+            {
+                strategicOverlay = Ship.DestroyShip(enemyPlayerBoard, strategicOverlay, coordinatesForDestruction);
+
+                for (int index = 0; index < shipPositions.Count; index++)
+                {
+                    if (coordinatesForDestruction == shipPositions[index])
+                    {
+                        shipPositions.RemoveAt(index);
+                    }
+                }
+            }
 
             CheckCellsStatus(enemyPlayerBoard);
 
@@ -168,11 +182,11 @@ namespace BattleShips
         {
             if (playerNumber == 1)
             {
-                UI.BoardStatus(PlayerOneBoard, 1);
+                UI.BoardStatus(PlayerOneBoard, 0, 1);
             }
             else
             {
-                UI.BoardStatus(PlayerTwoBoard, 2);
+                UI.BoardStatus(PlayerTwoBoard, 0, 2);
             }
 
             Console.WriteLine("\n Place " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");
@@ -222,11 +236,11 @@ namespace BattleShips
 
             if (playerNumber == 1)
             {
-                PlayerOneShipPositions.Add(shipCoordinates);
+                PlayerOneShipsPositions.Add(shipCoordinates);
             }
             else
             {
-                PlayerTwoShipPositions.Add(shipCoordinates);
+                PlayerTwoShipsPositions.Add(shipCoordinates);
             }
 
             bool shipCanBeBuild = Ship.CheckCellsAroundShip(board, shipCoordinates);

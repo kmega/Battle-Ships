@@ -82,17 +82,18 @@ namespace BattleShips
             return true;
         }
 
-        internal static CellStatus[,] CheckIfShipIsDestoyed(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<List<int[]>> shipPositions)
+        internal static List<int[]> CheckIfShipIsDestoyed(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<List<int[]>> shipsPositions)
         {
             int[] coordinates = { -1, -1 };
             int numberOfCellsDestoyed = 0;
             bool shipDestroyed = false;
+            List<int[]> shipCoordinates = new List<int[]>();
 
-            for (int i = 0; i < shipPositions.Count; i++)
+            for (int index = 0; index < shipsPositions.Count; index++)
             {
-                for (int j = 0; j < shipPositions[i].Count; j++)
+                for (int position = 0; position < shipsPositions[index].Count; position++)
                 {
-                    coordinates = shipPositions[i][j];
+                    coordinates = shipsPositions[index][position];
 
                     try
                     {
@@ -107,32 +108,33 @@ namespace BattleShips
                     }
                 }
 
-                if (numberOfCellsDestoyed == shipPositions[i].Count && shipDestroyed == false)
+                if (numberOfCellsDestoyed == shipsPositions[index].Count && shipDestroyed == false)
                 {
-                    strategicOverlay = DestroyShip(enemyPlayerBoard, strategicOverlay, shipPositions[i]);
+                    shipCoordinates = shipsPositions[index];
+
                     shipDestroyed = true;
                 }
             }
 
-            return strategicOverlay;
+            return shipCoordinates;
         }
 
         internal static CellStatus[,] DestroyShip(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<int[]> shipCoordinates)
         {
             int[] destroyCell = { -1, -1 };
 
-            for (int i = 0; i < shipCoordinates.Count; i++)
+            for (int index = 0; index < shipCoordinates.Count; index++)
             {
-                destroyCell = shipCoordinates[i];
+                destroyCell = shipCoordinates[index];
 
-                for (int row = -1; row <= 1; row++)
+                for (int column = -1; column <= 1; column++)
                 {
-                    for (int column = -1; column <= 1; column++)
+                    for (int row = -1; row <= 1; row++)
                     {
                         try
                         {
-                            enemyPlayerBoard[destroyCell[0] + row, destroyCell[1] + column] = CellStatus.Blocked;
-                            strategicOverlay[destroyCell[0] + row, destroyCell[1] + column] = CellStatus.Blocked;
+                            enemyPlayerBoard[destroyCell[0] + column, destroyCell[1] + row] = CellStatus.Blocked;
+                            strategicOverlay[destroyCell[0] + column, destroyCell[1] + row] = CellStatus.Blocked;
                         }
                         catch
                         {

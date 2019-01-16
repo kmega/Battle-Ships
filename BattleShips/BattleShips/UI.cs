@@ -1,23 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BattleShips
 {
     internal class UI
     {
         private static string PlayerTurn = "";
+        private static string EnemyPlayer = "";
 
-        internal static void BoardStatus(CellStatus[,] board, int playerNumber)
+        internal static void BoardStatus(CellStatus[,] board, int numberOfEnemyShips, int playerNumber)
         {
             if (playerNumber == 1)
             {
                 PlayerTurn = "One";
+                EnemyPlayer = "Two";
             }
             else
             {
                 PlayerTurn = "Two";
+                EnemyPlayer = "One";
             }
 
-            Console.WriteLine("\n Player " + PlayerTurn + ":\n\n     1 2 3 4 5 6 7 8 9 10\n ------------------------");
+            Console.WriteLine("\n [ Player " + PlayerTurn + " ] --- Player " + EnemyPlayer + " remaining ships: " + numberOfEnemyShips + "\n\n     1 2 3 4 5 6 7 8 9 10\n ------------------------");
 
             for (int column = 0; column < 10; column++)
             {
