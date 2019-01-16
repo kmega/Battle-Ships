@@ -5,12 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace BattleShips
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            GameEngine start = new GameEngine();
-            start.Game();
+            GameEngine.StartBattleShips();
 
             Console.ReadKey();
         }

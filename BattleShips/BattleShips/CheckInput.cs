@@ -4,6 +4,32 @@ namespace BattleShips
 {
     internal class CheckInput
     {
+        internal static string UserDirection(string userInput)
+        {
+            try
+            {
+                string direction = userInput.Split(' ')[1].ToLower();
+
+                switch (direction)
+                {
+                    case "up":
+                        return "up";
+                    case "right":
+                        return "right";
+                    case "down":
+                        return "down";
+                    case "left":
+                        return "left";
+                    default:
+                        return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         internal static int[] UserCoordinates(string userInput)
         {
             int[] coordinates = { -1, -1 };
@@ -37,7 +63,7 @@ namespace BattleShips
             }
         }
 
-        private static int[] ConvertToValidCoordinates(int[] coordinates, string letter, string number)
+        internal static int[] ConvertToValidCoordinates(int[] coordinates, string letter, string number)
         {
             try
             {
@@ -52,7 +78,7 @@ namespace BattleShips
             }
         }
 
-        private static int ChangeLetterToDecimal(string letter)
+        internal static int ChangeLetterToDecimal(string letter)
         {
             switch (letter)
             {
@@ -78,32 +104,6 @@ namespace BattleShips
                     return 9;
                 default:
                     return -1;
-            }
-        }
-
-        internal static string UserDirection(string userInput)
-        {
-            try
-            {
-                string direction = userInput.Split(' ')[1].ToLower();
-
-                switch (direction)
-                {
-                    case "up":
-                        return "up";
-                    case "right":
-                        return "right";
-                    case "down":
-                        return "down";
-                    case "left":
-                        return "left";
-                    default:
-                        return null;
-                }
-            }
-            catch
-            {
-                return null;
             }
         }
     }
