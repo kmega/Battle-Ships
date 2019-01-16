@@ -16,11 +16,11 @@ namespace BattleShips
 
         private static readonly List<int> PlayerOneShips = new List<int>
         {
-            2, 3, 4, 5
+            2, 3
         };
         private static readonly List<int> PlayerTwoShips = new List<int>
         {
-            2, 3, 4, 5
+            2, 3
         };
 
         private static readonly List<List<int[]>> PlayerOneShipPositions = new List<List<int[]>>();
@@ -36,7 +36,8 @@ namespace BattleShips
                 PlayerOneBoard = PlaceShips(PlayerOneBoard, PlayerTwoShips, 1);
             }
 
-            Console.WriteLine("\n\nAll ships has been placed. Press anything to continue.");
+            UI.BoardStatus(PlayerOneBoard, 1);
+            Console.WriteLine("\n\n All ships has been placed. Press anything to continue.");
             Console.ReadKey();
             Console.Clear();
 
@@ -45,7 +46,8 @@ namespace BattleShips
                 PlayerTwoBoard = PlaceShips(PlayerTwoBoard, PlayerOneShips, 2);
             }
 
-            Console.WriteLine("\n\nAll ships has been placed. Press anything to start the game.");
+            UI.BoardStatus(PlayerTwoBoard, 1);
+            Console.WriteLine("\n\n All ships has been placed. Press anything to start the game.");
             Console.ReadKey();
             Console.Clear();
 
@@ -87,7 +89,7 @@ namespace BattleShips
                     UI.BoardStatus(strategicOverlay, 2);
                 }
 
-                Console.WriteLine("\n\nShoot at cell using it's coordinates:");
+                Console.WriteLine("\n\n Shoot at cell using it's coordinates:");
                 input = Console.ReadLine();
                 Console.Clear();
 
@@ -95,7 +97,7 @@ namespace BattleShips
 
                 if (enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Fired || enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Hit || enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Blocked)
                 {
-                    Console.WriteLine("You already fired at those coordinates! You made you an Admiral?!\n");
+                    Console.WriteLine(" You already fired at those coordinates! You made you an Admiral?!\n");
 
                     wasFiredUpon = true;
                 }
@@ -118,17 +120,17 @@ namespace BattleShips
                 }
             }
 
-            strategicOverlay = CheckIfShipIsDestoyed(enemyPlayerBoard, shipPositions);
+            strategicOverlay = CheckIfShipIsDestoyed(enemyPlayerBoard, strategicOverlay, shipPositions);
 
             CheckCellsStatus(enemyPlayerBoard);
 
             return strategicOverlay;
         }
 
-        private static CellStatus[,] CheckIfShipIsDestoyed(CellStatus[,] enemyPlayerBoard, List<List<int[]>> shipPositions)
+        private static CellStatus[,] CheckIfShipIsDestoyed(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<List<int[]>> shipPositions)
         {
             int[] coordinates = { -1, -1 };
-            int counter = 0;
+            int numberOfCellsDestoyed = 0;
 
             for (int i = 0; i < shipPositions.Count; i++)
             {
@@ -138,20 +140,20 @@ namespace BattleShips
 
                     if (enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Hit)
                     {
-                        counter++;
+                        numberOfCellsDestoyed++;
                     }
                 }
 
-                if (counter == shipPositions[i].Count)
+                if (numberOfCellsDestoyed == shipPositions[i].Count)
                 {
-                    enemyPlayerBoard = DestroyShip(enemyPlayerBoard, shipPositions[i]);
+                    strategicOverlay = DestroyShip(enemyPlayerBoard, strategicOverlay, shipPositions[i]);
                 }
             }
 
-            return enemyPlayerBoard;
+            return strategicOverlay;
         }
 
-        private static CellStatus[,] DestroyShip(CellStatus[,] enemyPlayerBoard, List<int[]> shipCoordinates)
+        private static CellStatus[,] DestroyShip(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<int[]> shipCoordinates)
         {
             int[] destroyCell = { -1, -1 };
 
@@ -166,6 +168,7 @@ namespace BattleShips
                         try
                         {
                             enemyPlayerBoard[destroyCell[0] + row, destroyCell[1] + column] = CellStatus.Blocked;
+                            strategicOverlay[destroyCell[0] + row, destroyCell[1] + column] = CellStatus.Blocked;
                         }
                         catch
                         {
@@ -175,7 +178,7 @@ namespace BattleShips
                 }
             }
 
-            return enemyPlayerBoard;
+            return strategicOverlay;
         }
 
         private static void CheckCellsStatus(CellStatus[,] enemyPlayerBoard)
@@ -210,7 +213,7 @@ namespace BattleShips
                 UI.BoardStatus(PlayerTwoBoard, 2);
             }
 
-            Console.WriteLine("\n\nPlayer " + playerNumber + ".\nPlace " + shipCellNumber[0] + " cell ship using starting coordinates and direction:");
+            Console.WriteLine("\n Place " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");
             string userInput = Console.ReadLine();
 
             Console.Clear();
@@ -274,7 +277,7 @@ namespace BattleShips
             }
             else
             {
-                Console.WriteLine("Ship couldn't be build. It was either: near another ship, placed on another ship or out of board range.");
+                Console.WriteLine(" Ship couldn't be build. It was either: near another ship, placed on another ship or out of board range.");
 
                 return board;
             }

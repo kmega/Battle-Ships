@@ -4,8 +4,8 @@
     {
         Empty,
         Occupied,
-        Hit,
         Blocked,
+        Hit,
         Fired
     }
 }

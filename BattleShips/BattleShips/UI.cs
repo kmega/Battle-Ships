@@ -17,7 +17,7 @@ namespace BattleShips
                 PlayerTurn = "Two";
             }
 
-            Console.WriteLine(" Player " + PlayerTurn + ":\n\n     1 2 3 4 5 6 7 8 9 10\n ------------------------");
+            Console.WriteLine("\n Player " + PlayerTurn + ":\n\n     1 2 3 4 5 6 7 8 9 10\n ------------------------");
             for (int i = 0; i < 10; i++)
             {
                 switch (i)
@@ -59,22 +59,66 @@ namespace BattleShips
                     switch (playerOneBoard[i, j])
                     {
                         case CellStatus.Empty:
+                            Console.BackgroundColor = ConsoleColor.White;
                             Console.Write("  ");
+                            Console.BackgroundColor = ConsoleColor.Black;
                             break;
                         case CellStatus.Occupied:
-                            Console.Write("O ");
-                            break;
-                        case CellStatus.Hit:
-                            Console.Write("H ");
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.Write("  ");
+                            Console.BackgroundColor = ConsoleColor.Black;
                             break;
                         case CellStatus.Blocked:
-                            Console.Write("B ");
+                            Console.Write("  ");
+                            break;
+                        case CellStatus.Hit:
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.Write("  ");
+                            Console.BackgroundColor = ConsoleColor.Black;
                             break;
                         case CellStatus.Fired:
-                            Console.Write("# ");
+                            Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                            Console.Write("  ");
+                            Console.BackgroundColor = ConsoleColor.Black;
                             break;
                     }
                 }
+
+                switch (i)
+                {
+                    case 0:
+                        Console.Write("\t");
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write("  ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(" - Cell is empty.");
+                        break;
+                    case 1:
+                        Console.Write("\t");
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Write("  ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(" - Cell is occupied by a ship.");
+                        break;
+                    case 2:
+                        Console.Write("\t   - Cell is blocked.");
+                        break;
+                    case 3:
+                        Console.Write("\t");
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("  ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(" - Cell was hit.");
+                        break;
+                    case 4:
+                        Console.Write("\t");
+                        Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write("  ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(" - Cell was fired upon.");
+                        break;
+                }
+
                 Console.Write(Environment.NewLine);
             }
         }
