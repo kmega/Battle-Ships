@@ -24,13 +24,13 @@ namespace BattleShips
             }
         }
 
-        internal static CellStatus[,] BuildShip(CellStatus[,] board, List<int[]> shipCoordinates)
+        internal static CellStatus[,] BuildShip(CellStatus[,] board, List<int[]> shipsCoordinates)
         {
             int[] coordinates = { -1, -1 };
 
-            for (int i = 0; i < shipCoordinates.Count; i++)
+            for (int i = 0; i < shipsCoordinates.Count; i++)
             {
-                coordinates = shipCoordinates[i];
+                coordinates = shipsCoordinates[i];
 
                 board[coordinates[0], coordinates[1]] = CellStatus.Occupied;
             }
@@ -38,7 +38,7 @@ namespace BattleShips
             return board;
         }
 
-        internal static bool CheckCellsAroundShip(CellStatus[,] board, List<int[]> shipCoordinates)
+        internal static bool CheckCellsAroundShip(CellStatus[,] board, List<int[]> shipsCoordinates)
         {
             int[] coordinates = { -1, -1 };
 
@@ -46,9 +46,9 @@ namespace BattleShips
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    for (int k = 0; k < shipCoordinates.Count; k++)
+                    for (int k = 0; k < shipsCoordinates.Count; k++)
                     {
-                        coordinates = shipCoordinates[k];
+                        coordinates = shipsCoordinates[k];
 
                         try
                         {
@@ -65,9 +65,9 @@ namespace BattleShips
                 }
             }
 
-            for (int i = 0; i < shipCoordinates.Count; i++)
+            for (int i = 0; i < shipsCoordinates.Count; i++)
             {
-                coordinates = shipCoordinates[i];
+                coordinates = shipsCoordinates[i];
 
                 try
                 {
