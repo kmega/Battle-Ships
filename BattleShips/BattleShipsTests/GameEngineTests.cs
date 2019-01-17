@@ -76,5 +76,32 @@ namespace BattleShipsTests
                 Assert.IsTrue(expectedResult[0, row] == board[0, row]);
             }
         }
+
+        [TestMethod]
+        public void ShouldCheckForOccupiedCellsAndSwitchToFalseWhenAtLeastOneIsPresent()
+        {
+            // For
+            CellStatus[,] board = new CellStatus[10, 10];
+            board[0, 0] = CellStatus.Occupied;
+
+            // Given
+            GameEngine.CheckCellsStatus(board);
+
+            // Assert
+            Assert.IsTrue(GameEngine.Winner == false);
+        }
+
+        [TestMethod]
+        public void ShouldCheckForOccupiedCellsAndSwitchToTrueWhenNoneArePresent()
+        {
+            // For
+            CellStatus[,] board = new CellStatus[10, 10];
+
+            // Given
+            GameEngine.CheckCellsStatus(board);
+
+            // Assert
+            Assert.IsTrue(GameEngine.Winner == true);
+        }
     }
 }

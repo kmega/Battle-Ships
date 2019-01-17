@@ -26,7 +26,7 @@ namespace BattleShips
         private static readonly List<List<int[]>> PlayerOneShipsPositions = new List<List<int[]>>();
         private static readonly List<List<int[]>> PlayerTwoShipsPositions = new List<List<int[]>>();
 
-        private static bool Winner = false;
+        internal static bool Winner = false;
         private static int PlayerTurn = 1;
 
         internal static void StartBattleShips()
@@ -36,16 +36,14 @@ namespace BattleShips
                 PlayerOneBoard = PlaceShips(PlayerOneBoard, PlayerTwoShips, 1);
             }
 
-            string message = "Press anything to continue.\n";
-            ClickToContinue(PlayerOneBoard, message);
+            ClickToContinue(PlayerOneBoard, "Press anything to continue.\n");
 
             while (PlayerTwoPlacedAllShips == false)
             {
                 PlayerTwoBoard = PlaceShips(PlayerTwoBoard, PlayerOneShips, 2);
             }
 
-            message = "Press anything to start the game.\n";
-            ClickToContinue(PlayerTwoBoard, message);
+            ClickToContinue(PlayerTwoBoard, "Press anything to start the game.\n");
 
             while (Winner == false)
             {
@@ -157,7 +155,7 @@ namespace BattleShips
             return strategicOverlay;
         }
 
-        private static void CheckCellsStatus(CellStatus[,] enemyPlayerBoard)
+        internal static void CheckCellsStatus(CellStatus[,] enemyPlayerBoard)
         {
             int counter = 0;
 

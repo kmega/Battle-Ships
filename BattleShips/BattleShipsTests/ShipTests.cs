@@ -182,5 +182,104 @@ namespace BattleShipsTests
                 Assert.IsTrue(expectedResult == false);
             }
         }
+
+        [TestMethod]
+        public void ShouldBuildShipWhenCoordinatesAreValid()
+        {
+            // For
+            CellStatus[,] board = new CellStatus[10, 10];
+
+            int[] firstCoordinates = { 0, 0 };
+            int[] secondCoordinates = { 0, 1 };
+            int[] thirdCoordinates = { 0, 2 };
+
+            List<int[]> shipCoordinates = new List<int[]>
+            {
+                firstCoordinates, secondCoordinates, thirdCoordinates
+            };
+
+            // Given
+            CellStatus[,] expectedResult = Ship.BuildShip(board, shipCoordinates);
+
+            // Assert
+            for (int row = 0; row < 3; row++)
+            {
+                Assert.IsTrue(expectedResult[0, row] == board[0, row]);
+            }
+        }
+
+        [TestMethod]
+        public void ShouldCheckIfShipIsDestroyedAndReturnCoordinatesWhenAllCellsAreHit()
+        {
+            // For
+            CellStatus[,] board = new CellStatus[10, 10];
+
+            for (int row = 0; row < 3; row++)
+            {
+                board[0, row] = CellStatus.Hit;
+            }
+
+            int[] firstCoordinates = { 0, 0 };
+            int[] secondCoordinates = { 0, 1 };
+            int[] thirdCoordinates = { 0, 2 };
+
+            List<int[]> shipCoordinates = new List<int[]>
+            {
+                firstCoordinates, secondCoordinates, thirdCoordinates
+            };
+
+            List<List<int[]>> shipsPositions = new List<List<int[]>>
+            {
+                shipCoordinates
+            };
+
+            // Given
+            List<int[]> expectedResult = Ship.CheckIfShipIsDestoyed(board, board, shipsPositions);
+
+            // Assert
+            for (int index = 0; index < 3; index++)
+            {
+                Assert.IsTrue(expectedResult[index] == shipCoordinates[index]);
+            }
+        }
+
+        [TestMethod]
+        public void ShouldCheckIfShipIsDestroyedAndReturnNoneCoordinatesWhenAtLeastOneCellIsNotHit()
+        {
+            // For
+            CellStatus[,] board = new CellStatus[10, 10];
+
+            for (int row = 0; row < 3; row++)
+            {
+                board[0, row] = CellStatus.Hit;
+                if (row == 2)
+                {
+                    board[0, 2] = CellStatus.Occupied;
+                }
+            }
+
+            int[] firstCoordinates = { 0, 0 };
+            int[] secondCoordinates = { 0, 1 };
+            int[] thirdCoordinates = { 0, 2 };
+
+            List<int[]> shipCoordinates = new List<int[]>
+            {
+                firstCoordinates, secondCoordinates, thirdCoordinates
+            };
+
+            List<List<int[]>> shipsPositions = new List<List<int[]>>
+            {
+                shipCoordinates
+            };
+
+            // Given
+            List<int[]> expectedResult = Ship.CheckIfShipIsDestoyed(board, board, shipsPositions);
+
+            // Assert
+            for (int index = 0; index < 3; index++)
+            {
+                Assert.IsTrue(expectedResult.Count == 0);
+            }
+        }
     }
 }
