@@ -99,14 +99,19 @@ namespace BattleShipsTests
         }
 
         [TestMethod]
-        public void ShouldCheckAroundShipCellsAndReturnFalseWhenShipIsNotInBoardRange()
+        public void ShouldCheckAroundShipCellsAndReturnFalseWhenShipIsNearAnotherShip()
         {
             // For
             CellStatus[,] board = new CellStatus[10, 10];
 
-            int[] firstCoordinates = { 0, -1 };
-            int[] secondCoordinates = { 0, 0 };
-            int[] thirdCoordinates = { 0, 1 };
+            for (int row = 0; row < 3; row++)
+            {
+                board[1, row] = CellStatus.Occupied;
+            }
+
+            int[] firstCoordinates = { 0, 0 };
+            int[] secondCoordinates = { 0, 1 };
+            int[] thirdCoordinates = { 0, 2 };
 
             List<int[]> shipCoordinates = new List<int[]>
             {
@@ -124,19 +129,44 @@ namespace BattleShipsTests
         }
 
         [TestMethod]
-        public void ShouldCheckAroundShipCellsAndReturnFalseWhenShipIsNearAnotherShip()
+        public void ShouldCheckAroundShipCellsAndReturnFalseWhenShipIsBeingBuiltOnAnotherShip()
         {
             // For
             CellStatus[,] board = new CellStatus[10, 10];
 
-            for (int row = 0; row < 3; row++)
+            for (int column = 0; column < 3; column++)
             {
-                board[1, row] = CellStatus.Occupied;
+                board[column, 0] = CellStatus.Occupied;
             }
 
             int[] firstCoordinates = { 0, 0 };
             int[] secondCoordinates = { 0, 1 };
             int[] thirdCoordinates = { 0, 2 };
+
+            List<int[]> shipCoordinates = new List<int[]>
+            {
+                firstCoordinates, secondCoordinates, thirdCoordinates
+            };
+
+            // Given
+            bool expectedResult = Ship.CheckCellsAroundShip(board, shipCoordinates);
+
+            // Assert
+            for (int row = 0; row < 3; row++)
+            {
+                Assert.IsTrue(expectedResult == false);
+            }
+        }
+
+        [TestMethod]
+        public void ShouldCheckAroundShipCellsAndReturnFalseWhenShipIsNotInBoardRange()
+        {
+            // For
+            CellStatus[,] board = new CellStatus[10, 10];
+
+            int[] firstCoordinates = { 0, -1 };
+            int[] secondCoordinates = { 0, 0 };
+            int[] thirdCoordinates = { 0, 1 };
 
             List<int[]> shipCoordinates = new List<int[]>
             {
