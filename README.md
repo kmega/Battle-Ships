@@ -1,3 +1,3 @@
-# Battle-Ships-Showcase
+# Battle Ships Project
 
-This is a showcase of one of the projects I completed at Corealate .NET Developer course.
+This is one of the projects I completed at Corealate .NET Developer course.
