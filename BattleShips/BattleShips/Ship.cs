@@ -12,7 +12,7 @@ namespace BattleShips
 
             if (coordinates[0] == -1 || coordinates[1] == -1 || direction == null)
             {
-                Console.WriteLine("Wrong input!\n");
+                Console.WriteLine("\n Wrong input!\n");
 
                 return board;
             }

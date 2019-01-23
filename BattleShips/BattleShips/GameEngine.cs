@@ -35,16 +35,15 @@ namespace BattleShips
             {
                 PlayerOneBoard = PlaceShips(PlayerOneBoard, PlayerTwoShips, 1);
             }
-
             ClickToContinue(PlayerOneBoard, "Press anything to continue.\n");
 
             while (PlayerTwoPlacedAllShips == false)
             {
                 PlayerTwoBoard = PlaceShips(PlayerTwoBoard, PlayerOneShips, 2);
             }
-
             ClickToContinue(PlayerTwoBoard, "Press anything to start the game.\n");
 
+            string playerNumber;
             while (Winner == false)
             {
                 if (PlayerTurn == 1)
@@ -65,7 +64,17 @@ namespace BattleShips
                 }
             }
 
-            Console.WriteLine("\n Player " + PlayerTurn + " has WON!\n");
+            if (PlayerTurn == 1)
+            {
+                playerNumber = "One";
+            }
+            else
+            {
+                playerNumber = "Two";
+            }
+
+            Console.Clear();
+            Console.WriteLine("\n Player " + playerNumber + " has WON the battle! Press anything to quit.\n");
             Console.Write(" ");
         }
 
@@ -81,7 +90,7 @@ namespace BattleShips
         private static CellStatus[,] BattleStatus(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<List<int[]>> shipPositions)
         {
             bool wasFiredUpon = true;
-            string input = "";
+            string input = "", playerNumber;
             int[] coordinates = { -1, -1 };
             List<int[]> coordinatesForDestruction = new List<int[]>();
 
@@ -90,10 +99,12 @@ namespace BattleShips
                 if (PlayerTurn == 1)
                 {
                     UI.BoardStatus(strategicOverlay, PlayerTwoShipsPositions.Count, 1);
+                    playerNumber = "One";
                 }
                 else
                 {
                     UI.BoardStatus(strategicOverlay, PlayerOneShipsPositions.Count, 2);
+                    playerNumber = "Two";
                 }
 
                 Console.WriteLine("\n Shoot at cell using it's coordinates:\n");
@@ -107,7 +118,7 @@ namespace BattleShips
                 {
                     if (enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Fired || enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Hit || enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Blocked)
                     {
-                        Console.WriteLine("\n You already fired at those coordinates! You made you an Admiral?!\n");
+                        Console.WriteLine("\n You already fired at those coordinates! Who made you an Admiral?!\n");
 
                         wasFiredUpon = true;
                     }
@@ -119,6 +130,8 @@ namespace BattleShips
                             enemyPlayerBoard[coordinates[0], coordinates[1]] = CellStatus.Hit;
 
                             wasFiredUpon = false;
+
+                            Console.WriteLine("\n Player " + playerNumber + ". Reporting: Target hit!\n");
                         }
                         else
                         {
@@ -126,6 +139,8 @@ namespace BattleShips
                             enemyPlayerBoard[coordinates[0], coordinates[1]] = CellStatus.Fired;
 
                             wasFiredUpon = false;
+
+                            Console.WriteLine("\n Player " + playerNumber + ". Reporting: Shoot missed!\n");
                         }
                     }
                 }
