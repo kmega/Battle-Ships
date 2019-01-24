@@ -26,8 +26,9 @@ namespace BattleShips
         private static readonly List<List<int[]>> PlayerOneShipsPositions = new List<List<int[]>>();
         private static readonly List<List<int[]>> PlayerTwoShipsPositions = new List<List<int[]>>();
 
-        internal static bool Winner = false;
+        private static bool Winner = false;
         private static int PlayerTurn = 1;
+        private static ConsoleColor PlayerColor;
 
         internal static void StartBattleShips()
         {
@@ -74,13 +75,16 @@ namespace BattleShips
             }
 
             Console.Clear();
-            Console.WriteLine("\n Player " + playerNumber + " has WON the battle! Press anything to quit.\n");
+            Console.ForegroundColor = PlayerColor;
+            Console.Write("\n Player " + playerNumber);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(" has WON the battle! Press anything to quit.\n");
             Console.Write(" ");
         }
 
         private static void ClickToContinue(CellStatus[,] board, int playerNumber, string message)
         {
-            UI.BoardStatus(board, 0, playerNumber);
+            UI.BoardStatus(board, PlayerColor, 0, playerNumber);
             Console.WriteLine("\n All ships has been placed. " + message);
             Console.Write(" ");
             Console.ReadKey();
@@ -89,7 +93,6 @@ namespace BattleShips
 
         private static CellStatus[,] BattleStatus(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<List<int[]>> shipPositions)
         {
-            ConsoleColor playerColor;
             bool wasFiredUpon = true;
             string input = "", playerNumber;
             int[] coordinates = { -1, -1 };
@@ -99,15 +102,16 @@ namespace BattleShips
             {
                 if (PlayerTurn == 1)
                 {
-                    UI.BoardStatus(strategicOverlay, PlayerTwoShipsPositions.Count, 1);
+                    PlayerColor = ConsoleColor.Green;
+                    UI.BoardStatus(strategicOverlay, PlayerColor, PlayerTwoShipsPositions.Count, 1);
                     playerNumber = "One";
-                    playerColor = ConsoleColor.Green;
                 }
                 else
                 {
-                    UI.BoardStatus(strategicOverlay, PlayerOneShipsPositions.Count, 2);
+                    PlayerColor = ConsoleColor.Cyan;
+                    UI.BoardStatus(strategicOverlay, PlayerColor, PlayerOneShipsPositions.Count, 2);
                     playerNumber = "Two";
-                    playerColor = ConsoleColor.Cyan;
+                    PlayerColor = ConsoleColor.Cyan;
                 }
 
                 Console.WriteLine("\n Shoot at cell using it's coordinates:\n");
@@ -127,7 +131,7 @@ namespace BattleShips
                     }
                     else
                     {
-                        Console.ForegroundColor = playerColor;
+                        Console.ForegroundColor = PlayerColor;
 
                         if (enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Occupied)
                         {
@@ -206,11 +210,11 @@ namespace BattleShips
         {
             if (playerNumber == 1)
             {
-                UI.BoardStatus(PlayerOneBoard, 0, 1);
+                UI.BoardStatus(PlayerOneBoard, PlayerColor, 0, 1);
             }
             else
             {
-                UI.BoardStatus(PlayerTwoBoard, 0, 2);
+                UI.BoardStatus(PlayerTwoBoard, PlayerColor, 0, 2);
             }
 
             Console.WriteLine("\n Place " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");

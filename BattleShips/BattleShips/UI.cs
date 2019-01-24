@@ -5,38 +5,30 @@ namespace BattleShips
 {
     internal class UI
     {
-        internal static void BoardStatus(CellStatus[,] board, int numberOfEnemyShips, int playerNumber)
+        internal static void BoardStatus(CellStatus[,] board, ConsoleColor playerColor, int numberOfEnemyShips, int playerNumber)
         {
-            ConsoleColor playerColor;
+            string player;
 
             if (playerNumber == 1)
             {
                 playerColor = ConsoleColor.Green;
-
-                Console.Write("\n [ ");
-                Console.ForegroundColor = playerColor;
-                Console.Write("Player One");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(" ] --- Opponent ships remaining: " + numberOfEnemyShips + "\n\n     ");
-                Console.ForegroundColor = playerColor;
-                Console.Write("1 2 3 4 5 6 7 8 9 10\n");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(" ------------------------");
+                player = "One";
             }
             else
             {
                 playerColor = ConsoleColor.Cyan;
-
-                Console.Write("\n [ ");
-                Console.ForegroundColor = playerColor;
-                Console.Write("Player Two");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(" ] --- Opponent ships remaining: " + numberOfEnemyShips + "\n\n     ");
-                Console.ForegroundColor = playerColor;
-                Console.Write("1 2 3 4 5 6 7 8 9 10\n");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(" ------------------------");
+                player = "Two";
             }
+
+            Console.Write("\n [ ");
+            Console.ForegroundColor = playerColor;
+            Console.Write("Player " + player);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(" ] --- Opponent ships remaining: " + numberOfEnemyShips + "\n\n     ");
+            Console.ForegroundColor = playerColor;
+            Console.Write("1 2 3 4 5 6 7 8 9 10\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(" ------------------------");
 
             for (int column = 0; column < 10; column++)
             {
