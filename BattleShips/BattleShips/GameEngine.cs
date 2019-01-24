@@ -16,11 +16,11 @@ namespace BattleShips
 
         private static readonly List<int> PlayerOneShips = new List<int>
         {
-            2//2, 3, 3, 4, 5
+            2, 3, 3, 4, 5
         };
         private static readonly List<int> PlayerTwoShips = new List<int>
         {
-            2//2, 3, 3, 4, 5
+            2, 3, 3, 4, 5
         };
 
         private static readonly List<List<int[]>> PlayerOneShipsPositions = new List<List<int[]>>();
@@ -84,7 +84,9 @@ namespace BattleShips
 
         private static void ClickToContinue(CellStatus[,] board, int playerNumber, string message)
         {
-            UI.BoardStatus(board, PlayerColor, 0, playerNumber);
+            List<List<int[]>> fakeList = new List<List<int[]>>();
+
+            UI.BoardStatus(board, PlayerColor, fakeList, playerNumber);
             Console.WriteLine("\n All ships has been placed. " + message);
             Console.Write(" ");
             Console.ReadKey();
@@ -103,13 +105,13 @@ namespace BattleShips
                 if (PlayerTurn == 1)
                 {
                     PlayerColor = ConsoleColor.Green;
-                    UI.BoardStatus(strategicOverlay, PlayerColor, PlayerTwoShipsPositions.Count, 1);
+                    UI.BoardStatus(strategicOverlay, PlayerColor, PlayerTwoShipsPositions, 1);
                     playerNumber = "One";
                 }
                 else
                 {
                     PlayerColor = ConsoleColor.Cyan;
-                    UI.BoardStatus(strategicOverlay, PlayerColor, PlayerOneShipsPositions.Count, 2);
+                    UI.BoardStatus(strategicOverlay, PlayerColor, PlayerOneShipsPositions, 2);
                     playerNumber = "Two";
                     PlayerColor = ConsoleColor.Cyan;
                 }
@@ -141,7 +143,7 @@ namespace BattleShips
                             wasFiredUpon = false;
 
                             Console.Write("\n Player " + playerNumber + ": ");
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("TARGET HIT!\n");
                         }
                         else
@@ -152,7 +154,7 @@ namespace BattleShips
                             wasFiredUpon = false;
 
                             Console.Write("\n Player " + playerNumber + ": ");
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
                             Console.WriteLine("SHOOT MISSED!\n");
                         }
 
@@ -208,13 +210,15 @@ namespace BattleShips
 
         private static CellStatus[,] PlaceShips(CellStatus[,] board, List<int> shipCellNumber, int playerNumber)
         {
+            List<List<int[]>> fakeList = new List<List<int[]>>();
+
             if (playerNumber == 1)
             {
-                UI.BoardStatus(PlayerOneBoard, PlayerColor, 0, 1);
+                UI.BoardStatus(PlayerOneBoard, PlayerColor, fakeList, 1);
             }
             else
             {
-                UI.BoardStatus(PlayerTwoBoard, PlayerColor, 0, 2);
+                UI.BoardStatus(PlayerTwoBoard, PlayerColor, fakeList, 2);
             }
 
             Console.WriteLine("\n Place " + shipCellNumber[0] + " cell ship using starting coordinates and direction:\n");

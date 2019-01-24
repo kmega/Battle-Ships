@@ -5,9 +5,10 @@ namespace BattleShips
 {
     internal class UI
     {
-        internal static void BoardStatus(CellStatus[,] board, ConsoleColor playerColor, int numberOfEnemyShips, int playerNumber)
+        internal static void BoardStatus(CellStatus[,] board, ConsoleColor playerColor, List<List<int[]>> enemyShips, int playerNumber)
         {
             string player;
+            string enemyShipsStatus = "";
 
             if (playerNumber == 1)
             {
@@ -20,11 +21,31 @@ namespace BattleShips
                 player = "Two";
             }
 
+            if (enemyShips.Count != 0)
+            {
+                for (int i = 0; i < enemyShips.Count; i++)
+                {
+                    if (i == enemyShips.Count - 1)
+                    {
+                        enemyShipsStatus += enemyShips[i].Count.ToString();
+                    }
+                    else
+                    {
+                        enemyShipsStatus += enemyShips[i].Count.ToString() + ", ";
+                    }
+
+                }
+            }
+            else
+            {
+                enemyShipsStatus = "0";
+            }
+
             Console.Write("\n [ ");
             Console.ForegroundColor = playerColor;
             Console.Write("Player " + player);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(" ] --- Opponent ships remaining: " + numberOfEnemyShips + "\n\n     ");
+            Console.Write(" ] --- Opponent ships remaining: " + enemyShipsStatus + "\n\n     ");
             Console.ForegroundColor = playerColor;
             Console.Write("1 2 3 4 5 6 7 8 9 10\n");
             Console.ForegroundColor = ConsoleColor.White;
