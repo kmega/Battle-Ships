@@ -5,27 +5,42 @@ namespace BattleShips
 {
     internal class UI
     {
-        private static string PlayerTurn = "";
-        private static string EnemyPlayer = "";
-
         internal static void BoardStatus(CellStatus[,] board, int numberOfEnemyShips, int playerNumber)
         {
+            ConsoleColor playerColor;
+
             if (playerNumber == 1)
             {
-                PlayerTurn = "One";
-                EnemyPlayer = "Two";
+                playerColor = ConsoleColor.Green;
+
+                Console.Write("\n [ ");
+                Console.ForegroundColor = playerColor;
+                Console.Write("Player One");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(" ] --- Opponent ships remaining: " + numberOfEnemyShips + "\n\n     ");
+                Console.ForegroundColor = playerColor;
+                Console.Write("1 2 3 4 5 6 7 8 9 10\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(" ------------------------");
             }
             else
             {
-                PlayerTurn = "Two";
-                EnemyPlayer = "One";
-            }
+                playerColor = ConsoleColor.Cyan;
 
-            Console.WriteLine("\n [ Player " + PlayerTurn + " ] --- Player " + EnemyPlayer + " remaining ships: " + numberOfEnemyShips + "\n\n     1 2 3 4 5 6 7 8 9 10\n ------------------------");
+                Console.Write("\n [ ");
+                Console.ForegroundColor = playerColor;
+                Console.Write("Player Two");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(" ] --- Opponent ships remaining: " + numberOfEnemyShips + "\n\n     ");
+                Console.ForegroundColor = playerColor;
+                Console.Write("1 2 3 4 5 6 7 8 9 10\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(" ------------------------");
+            }
 
             for (int column = 0; column < 10; column++)
             {
-                WriteLetter(column);
+                WriteLetter(column, playerColor);
 
                 for (int row = 0; row < 10; row++)
                 {
@@ -38,41 +53,44 @@ namespace BattleShips
             }
         }
 
-        private static void WriteLetter(int column)
+        private static void WriteLetter(int column, ConsoleColor playerColor)
         {
+            Console.ForegroundColor = playerColor;
             switch (column)
             {
                 case 0:
-                    Console.Write(" A | ");
+                    Console.Write(" A ");
                     break;
                 case 1:
-                    Console.Write(" B | ");
+                    Console.Write(" B ");
                     break;
                 case 2:
-                    Console.Write(" C | ");
+                    Console.Write(" C ");
                     break;
                 case 3:
-                    Console.Write(" D | ");
+                    Console.Write(" D ");
                     break;
                 case 4:
-                    Console.Write(" E | ");
+                    Console.Write(" E ");
                     break;
                 case 5:
-                    Console.Write(" F | ");
+                    Console.Write(" F ");
                     break;
                 case 6:
-                    Console.Write(" G | ");
+                    Console.Write(" G ");
                     break;
                 case 7:
-                    Console.Write(" H | ");
+                    Console.Write(" H ");
                     break;
                 case 8:
-                    Console.Write(" I | ");
+                    Console.Write(" I ");
                     break;
                 case 9:
-                    Console.Write(" J | ");
+                    Console.Write(" J ");
                     break;
             }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("| ");
         }
 
         private static void WriteRowOfCells(CellStatus[,] board, int column, int row)
@@ -82,12 +100,10 @@ namespace BattleShips
                 case CellStatus.Empty:
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.Write("  ");
-                    Console.BackgroundColor = ConsoleColor.Black;
                     break;
                 case CellStatus.Occupied:
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.Write("  ");
-                    Console.BackgroundColor = ConsoleColor.Black;
                     break;
                 case CellStatus.Blocked:
                     Console.Write("  ");
@@ -95,14 +111,13 @@ namespace BattleShips
                 case CellStatus.Hit:
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
                     Console.Write("  ");
-                    Console.BackgroundColor = ConsoleColor.Black;
                     break;
                 case CellStatus.Fired:
                     Console.BackgroundColor = ConsoleColor.DarkMagenta;
                     Console.Write("  ");
-                    Console.BackgroundColor = ConsoleColor.Black;
                     break;
             }
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         private static void WriteInstructions(int column)
@@ -131,7 +146,7 @@ namespace BattleShips
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
                     Console.Write("  ");
                     Console.BackgroundColor = ConsoleColor.Black;
-                    Console.Write(" - Cell was hit.");
+                    Console.Write(" - Cell was hit / Enemy ship was hit.");
                     break;
                 case 4:
                     Console.Write("\t");

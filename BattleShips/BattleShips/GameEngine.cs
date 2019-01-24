@@ -16,11 +16,11 @@ namespace BattleShips
 
         private static readonly List<int> PlayerOneShips = new List<int>
         {
-            2, 3, 3, 4, 5
+            2//2, 3, 3, 4, 5
         };
         private static readonly List<int> PlayerTwoShips = new List<int>
         {
-            2, 3, 3, 4, 5
+            2//2, 3, 3, 4, 5
         };
 
         private static readonly List<List<int[]>> PlayerOneShipsPositions = new List<List<int[]>>();
@@ -35,13 +35,13 @@ namespace BattleShips
             {
                 PlayerOneBoard = PlaceShips(PlayerOneBoard, PlayerTwoShips, 1);
             }
-            ClickToContinue(PlayerOneBoard, "Press anything to continue.\n");
+            ClickToContinue(PlayerOneBoard, 1, "Press anything to continue.\n");
 
             while (PlayerTwoPlacedAllShips == false)
             {
                 PlayerTwoBoard = PlaceShips(PlayerTwoBoard, PlayerOneShips, 2);
             }
-            ClickToContinue(PlayerTwoBoard, "Press anything to start the game.\n");
+            ClickToContinue(PlayerTwoBoard, 2, "Press anything to start the game.\n");
 
             string playerNumber;
             while (Winner == false)
@@ -78,9 +78,9 @@ namespace BattleShips
             Console.Write(" ");
         }
 
-        private static void ClickToContinue(CellStatus[,] board, string message)
+        private static void ClickToContinue(CellStatus[,] board, int playerNumber, string message)
         {
-            UI.BoardStatus(board, 0, 1);
+            UI.BoardStatus(board, 0, playerNumber);
             Console.WriteLine("\n All ships has been placed. " + message);
             Console.Write(" ");
             Console.ReadKey();
@@ -89,6 +89,7 @@ namespace BattleShips
 
         private static CellStatus[,] BattleStatus(CellStatus[,] enemyPlayerBoard, CellStatus[,] strategicOverlay, List<List<int[]>> shipPositions)
         {
+            ConsoleColor playerColor;
             bool wasFiredUpon = true;
             string input = "", playerNumber;
             int[] coordinates = { -1, -1 };
@@ -100,11 +101,13 @@ namespace BattleShips
                 {
                     UI.BoardStatus(strategicOverlay, PlayerTwoShipsPositions.Count, 1);
                     playerNumber = "One";
+                    playerColor = ConsoleColor.Green;
                 }
                 else
                 {
                     UI.BoardStatus(strategicOverlay, PlayerOneShipsPositions.Count, 2);
                     playerNumber = "Two";
+                    playerColor = ConsoleColor.Cyan;
                 }
 
                 Console.WriteLine("\n Shoot at cell using it's coordinates:\n");
@@ -124,6 +127,8 @@ namespace BattleShips
                     }
                     else
                     {
+                        Console.ForegroundColor = playerColor;
+
                         if (enemyPlayerBoard[coordinates[0], coordinates[1]] == CellStatus.Occupied)
                         {
                             strategicOverlay[coordinates[0], coordinates[1]] = CellStatus.Hit;
@@ -131,7 +136,9 @@ namespace BattleShips
 
                             wasFiredUpon = false;
 
-                            Console.WriteLine("\n Player " + playerNumber + ". Reporting: Target hit!\n");
+                            Console.Write("\n Player " + playerNumber + ": ");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("TARGET HIT!\n");
                         }
                         else
                         {
@@ -140,8 +147,12 @@ namespace BattleShips
 
                             wasFiredUpon = false;
 
-                            Console.WriteLine("\n Player " + playerNumber + ". Reporting: Shoot missed!\n");
+                            Console.Write("\n Player " + playerNumber + ": ");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("SHOOT MISSED!\n");
                         }
+
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 catch
