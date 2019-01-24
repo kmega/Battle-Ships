@@ -26,7 +26,7 @@ namespace BattleShips
         private static readonly List<List<int[]>> PlayerOneShipsPositions = new List<List<int[]>>();
         private static readonly List<List<int[]>> PlayerTwoShipsPositions = new List<List<int[]>>();
 
-        private static bool Winner = false;
+        internal static bool Winner = false;
         private static int PlayerTurn = 1;
         private static ConsoleColor PlayerColor;
 
@@ -80,6 +80,7 @@ namespace BattleShips
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(" has WON the battle! Press anything to quit.\n");
             Console.Write(" ");
+            Console.ReadKey();
         }
 
         private static void ClickToContinue(CellStatus[,] board, int playerNumber, string message)
