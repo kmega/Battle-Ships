@@ -12,3 +12,10 @@ C:\Users\Charles\Battle-Ships-Solo-Project\BattleShips\BattleShips\obj\Debug\Bat
 C:\Users\Charles\Battle-Ships-Solo-Project\BattleShips\BattleShips\obj\Debug\BattleShips.csproj.CoreCompileInputs.cache
 C:\Users\Charles\Battle-Ships-Solo-Project\BattleShips\BattleShips\obj\Debug\BattleShips.exe
 C:\Users\Charles\Battle-Ships-Solo-Project\BattleShips\BattleShips\obj\Debug\BattleShips.pdb
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\bin\Debug\BattleShips.exe.config
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\bin\Debug\BattleShips.exe
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\bin\Debug\BattleShips.pdb
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\obj\Debug\BattleShips.csprojAssemblyReference.cache
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\obj\Debug\BattleShips.csproj.CoreCompileInputs.cache
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\obj\Debug\BattleShips.exe
+C:\Users\Charles\Desktop\Battle-Ships\BattleShipsOld\BattleShips\obj\Debug\BattleShips.pdb
