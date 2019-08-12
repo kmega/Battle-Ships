@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("BattleShipsTests")]
 
 namespace BattleShips
 {
-    internal class Program
+    class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
-            GameEngine.StartBattleShips();
+            Console.WriteLine("Hello World!");
         }
     }
 }
