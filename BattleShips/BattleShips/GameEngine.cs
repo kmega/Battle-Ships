@@ -6,11 +6,13 @@ namespace BattleShips
     {
         internal void Start()
         {
+            // Create BoardService() and fill two boards with empty cells.
             BoardService boardService = new BoardService();
 
-            CellStatus[,] playerOneBoard = boardService.CreateNewEmptyBoard();
-            CellStatus[,] playerTwoBoard = boardService.CreateNewEmptyBoard();
+            Cell[,] playerOneBoard = boardService.CreateNewEmptyBoard();
+            Cell[,] playerTwoBoard = boardService.CreateNewEmptyBoard();
 
+            // Create ShipService() and let players place their ships.
             ShipService shipService = new ShipService();
 
             shipService.PlaceShips(ref playerOneBoard, ref playerTwoBoard);

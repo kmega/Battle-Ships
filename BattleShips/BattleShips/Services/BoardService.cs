@@ -2,15 +2,16 @@
 {
     internal class BoardService
     {
-        internal CellStatus[,] CreateNewEmptyBoard()
+        internal Cell[,] CreateNewEmptyBoard()
         {
-            CellStatus[,] newBoard = new CellStatus[10, 10];
+            // Create an array of 10x10, fill it with empty cells and then return it.
+            Cell[,] newBoard = new Cell[10, 10];
 
             for (int i = 0; i < newBoard.GetLength(0); i++)
             {
                 for (int j = 0; j < newBoard.GetLength(1); j++)
                 {
-                    newBoard[i, j] = CellStatus.Empty;
+                    newBoard[i, j] = Cell.Empty;
                 }
             }
 

@@ -1,10 +1,11 @@
 ﻿namespace BattleShips
 {
-    enum CellStatus
+    enum Cell
     {
         Empty,
         Occupied,
         Hit,
-        Damaged
+        Damaged,
+        Blocked
     }
 }
