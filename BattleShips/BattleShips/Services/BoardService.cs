@@ -1,4 +1,6 @@
-﻿namespace BattleShips
+﻿using System;
+
+namespace BattleShips
 {
     internal class BoardService
     {
@@ -16,6 +18,11 @@
             }
 
             return newBoard;
+        }
+
+        internal void PlaceShip(string playerInput, ref Cell[,] playerBoard)
+        {
+            throw new NotImplementedException();
         }
     }
 }

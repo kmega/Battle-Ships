@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BattleShips
 {
@@ -11,6 +12,8 @@ namespace BattleShips
 
             InputService inputService = new InputService();
 
+            List<Ship> 
+
             bool playerOneTurn = true;
 
             while (true)
@@ -20,12 +23,16 @@ namespace BattleShips
                     userInterface.ShowBoard(playerOneBoard);
 
                     inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerOneBoard);
+
+                    playerOneTurn = false;
                 }
                 else
                 {
                     userInterface.ShowBoard(playerTwoBoard);
 
                     inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerTwoBoard);
+
+                    playerOneTurn = true;
                 }
             }
         }
