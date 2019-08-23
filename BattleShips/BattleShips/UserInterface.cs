@@ -13,7 +13,9 @@ namespace BattleShips
 
                 WriteOneRowOfCells(board, i);
 
-                Console.WriteLine();
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                Console.Write(Environment.NewLine);
             }
         }
 

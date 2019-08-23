@@ -9,7 +9,8 @@ namespace BattleShips
             // Create UserInterface(), show players their boards and let them place their ships.
             UserInterface userInterface = new UserInterface();
 
-            Cell[,] boardHolder;
+            InputService inputService = new InputService();
+
             bool playerOneTurn = true;
 
             while (true)
@@ -18,23 +19,15 @@ namespace BattleShips
                 {
                     userInterface.ShowBoard(playerOneBoard);
 
-                    boardHolder = playerOneBoard;
+                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerOneBoard);
                 }
                 else
                 {
                     userInterface.ShowBoard(playerTwoBoard);
 
-                    boardHolder = playerTwoBoard;
+                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerTwoBoard);
                 }
-
-                InputService inputService = new InputService();
-
-                string playerInput = inputService.GetPlayerInput();
-
-                inputService.CheckPlayerInput(playerInput, boardHolder);
             }
-
-            throw new NotImplementedException();
         }
     }
 }
