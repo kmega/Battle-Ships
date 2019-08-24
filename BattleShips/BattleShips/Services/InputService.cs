@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BattleShips
 {
@@ -6,6 +7,7 @@ namespace BattleShips
     {
         internal string GetPlayerInput()
         {
+            // Get player input and then return it.
             return Console.ReadLine();
         }
 
@@ -31,47 +33,55 @@ namespace BattleShips
         {
             int[] newInput = { 0, 0, 0 };
 
-            switch (playerInput[0])
+            switch (char.ToLower(playerInput[0]))
             {
                 case 'a':
-                case 'A':
                     newInput[0] = 0;
                     break;
                 case 'b':
-                case 'B':
                     newInput[0] = 1;
                     break;
                 case 'c':
-                case 'C':
                     newInput[0] = 2;
                     break;
                 case 'd':
-                case 'D':
                     newInput[0] = 3;
                     break;
                 case 'e':
-                case 'E':
                     newInput[0] = 4;
                     break;
                 case 'f':
-                case 'F':
                     newInput[0] = 5;
                     break;
                 case 'g':
-                case 'G':
                     newInput[0] = 6;
                     break;
                 case 'h':
-                case 'H':
                     newInput[0] = 7;
                     break;
                 case 'i':
-                case 'I':
                     newInput[0] = 8;
                     break;
                 case 'j':
-                case 'J':
                     newInput[0] = 9;
+                    break;
+            }
+
+            newInput[1] = Convert.ToInt32(new String(playerInput.Where(Char.IsDigit).ToArray())) - 1;
+
+            switch (playerInput.Substring(playerInput.Length - 4).ToLower())
+            {
+                case "up":
+                    newInput[2] = 1;
+                    break;
+                case "down":
+                    newInput[2] = 2;
+                    break;
+                case "left":
+                    newInput[2] = 3;
+                    break;
+                case "right":
+                    newInput[2] = 4;
                     break;
             }
 

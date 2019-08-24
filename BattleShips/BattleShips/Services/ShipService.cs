@@ -4,7 +4,7 @@ namespace BattleShips
 {
     internal class ShipService
     {
-        internal void PlaceShips(ref Cell[,] playerOneBoard, ref Cell[,] playerTwoBoard)
+        internal void PlaceShips(ref Player playerOne, ref Player playerTwo)
         {
             // Create UserInterface(), show players their boards and let them place their ships.
             UserInterface userInterface = new UserInterface();
@@ -17,19 +17,15 @@ namespace BattleShips
             {
                 if (playerOneTurn == true)
                 {
-                    userInterface.ShowBoard(playerOneBoard);
+                    userInterface.ShowBoard(playerOne.board);
 
-                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerOneBoard);
-
-                    playerOneTurn = false;
+                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerOne.board);
                 }
                 else
                 {
-                    userInterface.ShowBoard(playerTwoBoard);
+                    userInterface.ShowBoard(playerTwo.board);
 
-                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerTwoBoard);
-
-                    playerOneTurn = true;
+                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerTwo.board);
                 }
             }
         }

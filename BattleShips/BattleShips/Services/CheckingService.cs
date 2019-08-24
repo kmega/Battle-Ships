@@ -4,12 +4,12 @@ namespace BattleShips
 {
     internal class CheckingService
     {
-        internal bool CheckBoardBoundaries(string playerInput, ref Cell[,] playerBoard)
+        internal bool CheckBoardBoundaries(int[] playerInput, ref Cell[,] playerBoard)
         {
             throw new NotImplementedException();
         }
 
-        internal bool CheckNearbyCells(string playerInput, ref Cell[,] playerBoard)
+        internal bool CheckNearbyCells(int[] playerInput, ref Cell[,] playerBoard)
         {
             throw new NotImplementedException();
         }

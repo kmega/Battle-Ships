@@ -7,32 +7,19 @@ namespace BattleShips
     {
         internal void Start()
         {
-            // Create BoardService() and fill two boards with empty cells.
+            // Create two player instances with board, ships and identification number.
+            Player playerOne = new Player(1), playerTwo = new Player(2);
+
+            // Create BoardService() and fill players boards with empty cells.
             BoardService boardService = new BoardService();
 
-            Cell[,] playerOneBoard = boardService.CreateNewEmptyBoard();
-            Cell[,] playerTwoBoard = boardService.CreateNewEmptyBoard();
-
-            // Create two lists of ships available for placement.
-            List<Ship> playerOneShips = new List<Ship>() {
-                new Ship(2),
-                new Ship(3),
-                new Ship(3),
-                new Ship(4),
-                new Ship(5)
-            };
-            List<Ship> playerTwoShips = new List<Ship>() {
-                new Ship(2),
-                new Ship(3),
-                new Ship(3),
-                new Ship(4),
-                new Ship(5)
-            };
+            playerOne.board = boardService.CreateNewEmptyBoard();
+            playerOne.board = boardService.CreateNewEmptyBoard();
 
             // Create ShipService() and let players place their ships.
             ShipService shipService = new ShipService();
 
-            shipService.PlaceShips(ref playerOneBoard, ref playerTwoBoard);
+            shipService.PlaceShips(ref playerOne, ref playerTwo);
 
             throw new NotImplementedException();
         }
