@@ -19,13 +19,13 @@ namespace BattleShips
                 {
                     userInterface.ShowBoard(playerOne.board);
 
-                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerOne.board);
+                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerOne);
                 }
                 else
                 {
                     userInterface.ShowBoard(playerTwo.board);
 
-                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerTwo.board);
+                    inputService.CheckPlayerInput(inputService.GetPlayerInput(), ref playerTwo);
                 }
             }
         }

@@ -20,7 +20,7 @@ namespace BattleShips
             return newBoard;
         }
 
-        internal void PlaceShip(string playerInput, ref Cell[,] playerBoard)
+        internal void PlaceShipOnBoard(int[] convertedInput, ref Cell[,] board)
         {
             throw new NotImplementedException();
         }

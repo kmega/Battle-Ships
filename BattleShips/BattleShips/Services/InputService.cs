@@ -11,17 +11,17 @@ namespace BattleShips
             return Console.ReadLine();
         }
 
-        internal void CheckPlayerInput(string playerInput, ref Cell[,] playerBoard)
+        internal void CheckPlayerInput(string playerInput, ref Player player)
         {
             int[] convertedInput = ConvertPlayerInput(playerInput);
 
             CheckingService checkingService = new CheckingService();
 
-            if (checkingService.CheckBoardBoundaries(playerInput, ref playerBoard) == true && checkingService.CheckNearbyCells(playerInput, ref playerBoard) == true)
+            if (checkingService.CheckBoardBoundaries(convertedInput, ref player) == true && checkingService.CheckNearbyCells(convertedInput, ref player) == true)
             {
                 BoardService boardService = new BoardService();
 
-                boardService.PlaceShip(playerInput, ref playerBoard);
+                boardService.PlaceShipOnBoard(convertedInput, ref player.board);
             }
             else
             {

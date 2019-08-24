@@ -4,9 +4,9 @@ namespace BattleShips
 {
     internal class Ship
     {
-        int length = 0;
+        internal int length;
 
-        List<int[]> coordinates = new List<int[]>();
+        internal List<int[]> coordinates = new List<int[]>();
 
         public Ship(int shipLength)
         {

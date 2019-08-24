@@ -6,7 +6,7 @@ namespace BattleShips
     {
         internal Cell[,] board;
 
-        internal List<Ship> playerTwoShips = new List<Ship>()
+        internal List<Ship> ships = new List<Ship>()
         {
             new Ship(2),
             new Ship(3),
@@ -14,5 +14,7 @@ namespace BattleShips
             new Ship(4),
             new Ship(5)
         };
+
+        internal int shipIndex = 0;
     }
 }
