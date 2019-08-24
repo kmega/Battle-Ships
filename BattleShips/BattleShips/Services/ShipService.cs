@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BattleShips
 {
@@ -11,8 +10,6 @@ namespace BattleShips
             UserInterface userInterface = new UserInterface();
 
             InputService inputService = new InputService();
-
-            List<Ship> 
 
             bool playerOneTurn = true;
 
