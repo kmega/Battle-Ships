@@ -4,30 +4,32 @@
     {
         internal bool CheckBoardBoundaries(int[] playerInput, ref Player player)
         {
-            int index = player.shipIndex;
+            Ship ship = player.ships[player.shipIndex];
 
-            for (int i = 0; i < player.ships[index].length; i++)
+            for (int i = 0; i < ship.length; i++)
             {
                 try
                 {
                     switch (playerInput[2])
                     {
                         case 1:
-                            player.ships[index].coordinates.Add(new int[] { playerInput[0] - i, playerInput[1] });
+                            ship.coordinates.Add(new int[] { playerInput[0] - i, playerInput[1] });
                             break;
                         case 2:
-                            player.ships[index].coordinates.Add(new int[] { playerInput[0] + i, playerInput[1] });
+                            ship.coordinates.Add(new int[] { playerInput[0] + i, playerInput[1] });
                             break;
                         case 3:
-                            player.ships[index].coordinates.Add(new int[] { playerInput[0], playerInput[1] - i });
+                            ship.coordinates.Add(new int[] { playerInput[0], playerInput[1] - i });
                             break;
                         case 4:
-                            player.ships[index].coordinates.Add(new int[] { playerInput[0], playerInput[1] + i });
+                            ship.coordinates.Add(new int[] { playerInput[0], playerInput[1] + i });
                             break;
                     }
                 }
                 catch
                 {
+                    ship.coordinates.Clear();
+
                     return false;
                 }
             }

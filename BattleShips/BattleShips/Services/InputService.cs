@@ -19,9 +19,9 @@ namespace BattleShips
 
             if (checkingService.CheckBoardBoundaries(convertedInput, ref player) == true && checkingService.CheckNearbyCells(convertedInput, ref player) == true)
             {
-                BoardService boardService = new BoardService();
+                ShipService shipService = new ShipService();
 
-                boardService.PlaceShipOnBoard(convertedInput, ref player.board);
+                shipService.PlaceShipOnBoard(convertedInput, ref player);
             }
             else
             {
@@ -69,7 +69,9 @@ namespace BattleShips
 
             newInput[1] = Convert.ToInt32(new String(playerInput.Where(Char.IsDigit).ToArray())) - 1;
 
-            switch (playerInput.Substring(playerInput.Length - 4).ToLower())
+            char[] digits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+            switch (playerInput.TrimStart(digits).ToLower())
             {
                 case "up":
                     newInput[2] = 1;

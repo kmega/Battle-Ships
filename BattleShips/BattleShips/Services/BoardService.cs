@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BattleShips
+﻿namespace BattleShips
 {
     internal class BoardService
     {
@@ -18,11 +16,6 @@ namespace BattleShips
             }
 
             return newBoard;
-        }
-
-        internal void PlaceShipOnBoard(int[] convertedInput, ref Cell[,] board)
-        {
-            throw new NotImplementedException();
         }
     }
 }

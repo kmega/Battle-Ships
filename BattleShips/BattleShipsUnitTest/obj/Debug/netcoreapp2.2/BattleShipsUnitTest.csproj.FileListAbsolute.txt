@@ -1,0 +1,17 @@
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShipsUnitTest.deps.json
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShipsUnitTest.runtimeconfig.json
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShipsUnitTest.runtimeconfig.dev.json
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShipsUnitTest.dll
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShipsUnitTest.pdb
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShips.dll
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\bin\Debug\netcoreapp2.2\BattleShips.pdb
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.csprojAssemblyReference.cache
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.csproj.CoreCompileInputs.cache
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.AssemblyInfoInputs.cache
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.AssemblyInfo.cs
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.csproj.CopyComplete
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.dll
+C:\Users\Charles\Desktop\Battle-Ships\BattleShips\BattleShipsUnitTest\obj\Debug\netcoreapp2.2\BattleShipsUnitTest.pdb

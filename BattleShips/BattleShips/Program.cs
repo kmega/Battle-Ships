@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("BattleShipsUnitTest")]
 
 namespace BattleShips
 {

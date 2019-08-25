@@ -29,5 +29,17 @@ namespace BattleShips
                 }
             }
         }
+
+        internal void PlaceShipOnBoard(int[] convertedInput, ref Player player)
+        {
+            Ship ship = player.ships[player.shipIndex];
+
+            foreach (var coordinates in ship.coordinates)
+            {
+                player.board[coordinates[0], coordinates[1]] = Cell.Occupied;
+            }
+
+            player.shipIndex++;
+        }
     }
 }
