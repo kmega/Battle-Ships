@@ -33,11 +33,15 @@ namespace BattleShipsUnitTest
         public void ShouldCheckBoardBoundaries()
         {
             // For
+            Player player = new Player();
+
             CheckingService checkingService = new CheckingService();
 
             // Given
+            bool expectedResult = false, result = checkingService.CheckBoardBoundaries(new int[] { 0, 0, 3 }, ref player);
 
             // Assert
+            Assert.IsTrue(expectedResult == result);
         }
     }
 }

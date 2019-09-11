@@ -4,6 +4,7 @@
     {
         internal bool CheckBoardBoundaries(int[] playerInput, ref Player player)
         {
+            // Check if ship is inside board boundaries.
             Ship ship = player.ships[player.shipIndex];
 
             for (int i = 0; i < ship.length; i++)
@@ -39,6 +40,7 @@
 
         internal bool CheckNearbyCells(int[] playerInput, ref Player player)
         {
+            // Check nearby cells for already placed ship.
             int index = player.shipIndex;
 
             foreach (var coordinates in player.ships[index].coordinates)

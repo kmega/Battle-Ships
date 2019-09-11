@@ -6,6 +6,8 @@ namespace BattleShips
     {
         internal Cell[,] board;
 
+        internal Cell[,] dummyBoard;
+
         internal List<Ship> ships = new List<Ship>()
         {
             new Ship(2),
